@@ -2,7 +2,7 @@ import pool from "../config/db.js";
 
 export const createUser = async (name, email, password, role) => {
   const connection = await pool.getConnection(); // Get a transaction connection
-  
+
   try {
     await connection.beginTransaction(); // Start transaction
 
@@ -44,6 +44,7 @@ export const getUserByEmail = async (email) => {
 
 export const getAllUsers = async () => {
   const [users] = await pool.query("SELECT * FROM users");
+  console.log("users", users);
   return users;
 };
 

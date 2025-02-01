@@ -3,19 +3,56 @@
 A RESTful API for User Management using Node.js, Express.js, and MySQL, following best coding practices with ES6 standards and Swagger documentation.
 Supports JWT authentication, role-based access control (RBAC), and API documentation with Swagger.
 
+### Features ###
+
+* User authentication (JWT-based)
+* Admin-only access control
+* User CRUD operations
+* MySQL database integration
+* Swagger API documentation
+* Docker containerization
+* Jest-based testing
+
 ## Project Setup Instructions (Local Environment)
 
-1. Clone the Repository
+* Prerequisites
+Ensure you have the following installed on your system:
+
+* Node.js (>=14.x)
+* MySQL (>=8.x)
+* Docker & Docker Compose (optional for containerized setup)
+* MySQL Workbench (optional for database management)
+
+1. Step 1: Clone the Repository
 
 ```
-    git clone https://github.com/your-repo/user-management-api.git
-    cd user-management-api
+    git clone https://github.com/FormShantonu/user-management-system.git
+    cd user-management-system
 ```
 
-2. Install Dependencies
+2. Step 2: Install Dependencies
 
 ```
     npm install
+```
+
+Step 3: Configure Environment Variables
+
+Create a .env file in the root directory and add the following:
+
+```
+# Server Configuration
+PORT=3000
+
+# Database Configuration
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=root
+DB_NAME=user_management
+DB_PORT=3306
+
+# JWT Secret Key
+JWT_SECRET=your_secret_key
 ```
 
 ## MySQL Database Setup & Migrations
@@ -30,30 +67,10 @@ Log into MySQL and run:
 ```
 
 2. Create the Users Table and  admin data insert automaticaly -> email : admin@example.com, password: admin123
-3. Environment Variables Configuration (.env File)
 
-```
-    PORT=3000
+## API Documentation (Swagger) ##
 
-    DB_HOST=localhost
-    DB_USER=root
-    DB_PASSWORD=yourpassword
-    DB_NAME=user_management
-
-    JWT_SECRET=your_secret_key
-    JWT_EXPIRES_IN=1d
-
-```
-
-4. Running the API Locally
-
-start the server
-
-```
-npm run dev
-```
-
-The API will run at: http://localhost:3000
+Swagger UI is available at: http://localhost:3000/api-docs
 
 ## API Endpoints & Usage
 
@@ -164,6 +181,31 @@ http://localhost:3000/api-docs
 
 Click "Authorize" and enter your JWT token to test secured endpoints.
 Test API requests directly from Swagger UI.
+
+## Running Tests ##
+Run tests using Jest: npm test
+
+## Connecting Docker MySQL to MySQL Workbench ##
+
+1. Open MySQL Workbench.
+2. Create a new connection with:
+  * Hostname: localhost
+  * Port: 3307 (as mapped in docker-compose.yml)
+  * Username: root
+  * Password: root
+3. Click Test Connection → Should be successful.
+
+## Stopping & Cleaning Up ##
+
+* Stop containers:
+  ```
+    docker-compose down
+  ```
+* Stop and remove volumes
+
+  ```
+    docker-compose down -v
+  ```
 
 ## Troubleshooting
 

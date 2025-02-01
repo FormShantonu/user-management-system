@@ -19,7 +19,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "jest"
   },
   
   "keywords": [],
@@ -27,6 +27,7 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.7.0",
+    "jest-environment-node": "^29.7.0",
     "jest-esm-transformer": "^1.0.0",
     "supertest": "^7.0.0"
   }
