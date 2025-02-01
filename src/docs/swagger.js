@@ -9,7 +9,17 @@ const options = {
             version: '1.0.0',
             description: 'Simple User Management API using Express and MySQL',
         },
-        servers: [{ url: 'http://localhost:3000' }],
+        servers: [{ url: 'http://localhost:3000/api' }],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
+        security: [{ bearerAuth: [] }],
     },
     apis: ['./src/routes/*.js'],
 };
