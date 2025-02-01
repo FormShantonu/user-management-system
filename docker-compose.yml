@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PORT= 3306
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=user_management
+      - JWT_SECRET=your_secret_key
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: ["npm", "run", "dev"]
+
+  mysql:
+    image: mysql:8
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user_management
+      
+    ports:
+      - "3307:3306" # Map MySQL port
+    volumes:
+      - mysql_data:/var/lib/mysql # Persistent MySQL storage
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Initialize DB with script
+
+  redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  mysql_data:
+    driver: local

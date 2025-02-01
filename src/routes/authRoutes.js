@@ -1,5 +1,5 @@
-import express from 'express';
-import { login } from '../controllers/authController.js';
+import express from "express";
+import { login } from "../controllers/authController.js";
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ const router = express.Router();
  *                 example: "admin@example.com"
  *               password:
  *                 type: string
- *                 example: "password123"
+ *                 example: "admin123"
  *     responses:
  *       200:
  *         description: JWT token received
@@ -44,6 +44,6 @@ const router = express.Router();
  *         description: Invalid email or password
  */
 
-router.post('/login', login);
+router.post("/login", login);
 
 export default router;

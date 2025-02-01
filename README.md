@@ -29,32 +29,8 @@ Log into MySQL and run:
     USE user_management;
 ```
 
-2. Create the Users Table
-
-Run the following SQL query in your MySQL database:
-
-```
-    CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'user') NOT NULL DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-```
-
-3. Insert an Admin User
-
-Generate a hashed password (using bcrypt) and insert an admin user manually:
-
-```
-    INSERT INTO users (name, email, password, role)
-    VALUES ('Admin', 'admin@example.com', '$2a$10$your_hashed_password_here', 'admin');
-
-```
-
-4. Environment Variables Configuration (.env File)
+2. Create the Users Table and  admin data insert automaticaly -> email : admin@example.com, password: admin123
+3. Environment Variables Configuration (.env File)
 
 ```
     PORT=3000
@@ -69,7 +45,7 @@ Generate a hashed password (using bcrypt) and insert an admin user manually:
 
 ```
 
-5. Running the API Locally
+4. Running the API Locally
 
 start the server
 
@@ -180,7 +156,7 @@ DELETE /users/:id
 Authorization: Bearer <your_jwt_token>
 ```
 
-## API Documentation with Swagger ##
+## API Documentation with Swagger
 
 Swagger documentation is available at:
 
@@ -189,29 +165,29 @@ http://localhost:3000/api-docs
 Click "Authorize" and enter your JWT token to test secured endpoints.
 Test API requests directly from Swagger UI.
 
-## Troubleshooting ##
+## Troubleshooting
 
-* 1. Database Errors
-    If you get "Table 'user_management.users' doesn't exist", make sure you:
+- 1. Database Errors
+     If you get "Table 'user_management.users' doesn't exist", make sure you:
 
-    * Created the database and table correctly.
-    * Updated .env with the correct database credentials.
-    * Restarted the server.
-* 2. Login Fails
-    * Ensure you inserted an admin user with a hashed password.
-    * Check the database with:
-        ```
-            SELECT * FROM users;
-        ```
-* 3. JWT Token Issues
-  * Make sure your .env has JWT_SECRET defined.
-  * Tokens expire in 1 day, so generate a new one if expired.
+  - Created the database and table correctly.
+  - Updated .env with the correct database credentials.
+  - Restarted the server.
 
-## Technologies Used ##
+- 2. Login Fails
+  - Ensure you inserted an admin user with a hashed password.
+  - Check the database with:
+    ```
+        SELECT * FROM users;
+    ```
+- 3. JWT Token Issues
+  - Make sure your .env has JWT_SECRET defined.
+  - Tokens expire in 1 day, so generate a new one if expired.
 
-* Node.js (Express.js)
-* MySQL (Database)
-* JWT Authentication
-* Swagger UI (API Documentation)
-* bcrypt.js (Password Hashing)
+## Technologies Used
 
+- Node.js (Express.js)
+- MySQL (Database)
+- JWT Authentication
+- Swagger UI (API Documentation)
+- bcrypt.js (Password Hashing)
