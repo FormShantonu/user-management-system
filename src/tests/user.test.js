@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../app.js";
 import jwt from "jsonwebtoken";
-
+import db from "../config/db.js"; // Your DB connection file
 
 // Generate a valid JWT token for testing
 const adminToken = jwt.sign(
@@ -51,6 +51,7 @@ describe("POST /api/users", () => {
       "message",
       "User created successfully"
     );
+
     // Step 3: Store the user ID for cleanup
     createdUserId = response.body.id;
   });
@@ -88,5 +89,6 @@ describe("POST /api/users", () => {
         .delete(`/api/users/${createdUserId}`)
         .set("Authorization", `Bearer ${adminToken}`);
     }
+    await db.end();
   });
 });

@@ -22,7 +22,7 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    command: ["npm", "run", "dev"]
+    command: sh -c "npm install && npm test && npm start"
 
   mysql:
     image: mysql:8
@@ -31,7 +31,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: user_management
-      
+
     ports:
       - "3307:3306" # Map MySQL port
     volumes:

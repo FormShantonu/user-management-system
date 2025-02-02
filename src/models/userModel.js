@@ -32,6 +32,8 @@ export const createUser = async (name, email, password, role) => {
     throw error instanceof BadRequestError
       ? error
       : new InternalServerError("Failed to create user");
+  } finally {
+    connection.release();
   }
 };
 

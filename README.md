@@ -18,7 +18,7 @@ Supports JWT authentication, role-based access control (RBAC), and API documenta
 * Prerequisites
 Ensure you have the following installed on your system:
 
-* Node.js (>=14.x)
+* Node.js (>=18.x)
 * MySQL (>=8.x)
 * Docker & Docker Compose (optional for containerized setup)
 * MySQL Workbench (optional for database management)
@@ -66,7 +66,29 @@ Log into MySQL and run:
     USE user_management;
 ```
 
-2. Create the Users Table and  admin data insert automaticaly -> email : admin@example.com, password: admin123
+2. Create the Users Table
+
+Run the following SQL query in your MySQL database:
+
+```
+    CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'user') NOT NULL DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+```
+3. Insert an Admin User
+
+Generate a hashed password (using bcrypt) and insert an admin user manually:
+
+```
+    INSERT INTO users (name, email, password, role)
+    VALUES ('Admin', 'admin@example.com', '$2y$10$zZTrAutX8G6O72uAu8tGOOJSrM1TNaY81kMBViCsldta4A9blpLPa', 'admin');
+```
+
 
 ## API Documentation (Swagger) ##
 
@@ -233,3 +255,11 @@ Run tests using Jest: npm test
 - JWT Authentication
 - Swagger UI (API Documentation)
 - bcrypt.js (Password Hashing)
+
+## Building & Running with Docker ##
+
+
+```
+docker-compose up --build -d
+```
+after running the docker it will first run test case and then run the project.
