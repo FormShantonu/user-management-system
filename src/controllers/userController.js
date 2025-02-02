@@ -26,7 +26,6 @@ export const createUser = async (req, res, next) => {
 
 export const getUsers = async (req, res, next) => {
   try {
-    console.log("Fetching users...");
     const users = await UserModel.getAllUsers();
     res.status(200).json(users);
   } catch (error) {
